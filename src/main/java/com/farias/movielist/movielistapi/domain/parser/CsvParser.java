@@ -2,9 +2,9 @@ package com.farias.movielist.movielistapi.domain.parser;
 
 import java.io.InputStream;
 
-import com.farias.movielist.movielistapi.domain.service.MovieService.ImportMoviesInput;
+import com.farias.movielist.movielistapi.domain.dto.MovieImportDTO;
 
 public interface CsvParser {
 
-    public ImportMoviesInput parseCsvToMoviesInput(InputStream inputStream) throws CsvParserException;
+    public MovieImportDTO parseCsvToMoviesInput(InputStream inputStream) throws CsvParserException;
 }
