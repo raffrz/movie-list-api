@@ -98,7 +98,8 @@ public class MovieService {
 
         @JsonIgnore
         Stream<String> getProducersAsStream() {
-            return Arrays.stream(producers.split(","))
+            var normalizedProducers = producers.replaceAll("and,", ",").replaceAll("and", ",");
+            return Arrays.stream(normalizedProducers.split(","))
                     .map(String::trim)
                     .distinct();
         }
@@ -109,8 +110,4 @@ public class MovieService {
         }
     }
 
-    @Transactional
-    public void printMovies() {
-        movieRepository.findAll().forEach(System.out::println);
-    }
 }
