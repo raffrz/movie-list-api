@@ -1,8 +1,11 @@
 package com.farias.movielist.movielistapi.domain.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.farias.movielist.movielistapi.domain.dto.AwardWinnerIntervalDTO;
 import com.farias.movielist.movielistapi.domain.entity.Producer;
 import com.farias.movielist.movielistapi.domain.repository.ProducerRepository;
 
@@ -26,4 +29,17 @@ public class ProducerService {
             return producer;
         });
     }
+
+    @Transactional
+    public List<AwardWinnerIntervalDTO> findProducersWithMaxProductionInterval() {
+        var maxProductionInterval = producerRepository.findMaxAwardWinningProductionInterval();
+        return producerRepository.findProducersWithMaxAwardWinningInterval(maxProductionInterval);
+    }
+
+    @Transactional
+    public List<AwardWinnerIntervalDTO> findProducersWithMinProductionInterval() {
+        var minProductionInterval = producerRepository.findMinAwardWinningProductionInterval();
+        return producerRepository.findProducersWithMinAwardWinningInterval(minProductionInterval);
+    }
+
 }
