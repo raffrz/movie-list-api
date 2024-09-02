@@ -27,6 +27,14 @@ Para iniciar a aplicação, utilize o comando Maven Wrapper:
 ```
 Este comando compila o projeto e inicia o servidor Spring Boot.
 
+## Testes
+
+Para testar a aplicação, utilize o seguinte comando:
+
+```bash
+./mvnw test
+```
+
 ## Swagger
 
 A documentação interativa da API pode ser acessada através do Swagger. Após iniciar a aplicação, acesse:
