@@ -16,15 +16,15 @@ import com.opencsv.bean.CsvToBeanBuilder;
 public class CsvParserOpenCsvImpl implements CsvParser {
 
     @Override
-    public MovieImportDTO parseCsvToMoviesInput(InputStream inputStream) throws CsvParserException {
+    public MovieImportDTO parseCsvToMovieImportDTO(InputStream inputStream) throws CsvParserException {
         try {
-            List<MovieImportItemDTO> moviesInput = new CsvToBeanBuilder<MovieImportItemDTO>(
+            List<MovieImportItemDTO> movieItems = new CsvToBeanBuilder<MovieImportItemDTO>(
                     new InputStreamReader(inputStream))
                     .withType(MovieImportItemDTO.class)
                     .withSeparator(';')
                     .build()
                     .parse();
-            return new MovieImportDTO(moviesInput);
+            return new MovieImportDTO(movieItems);
         } catch (Exception e) {
             throw new CsvParserException(e);
         }

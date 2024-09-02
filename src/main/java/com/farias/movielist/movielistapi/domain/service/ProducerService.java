@@ -31,13 +31,13 @@ public class ProducerService {
     }
 
     @Transactional
-    public List<AwardWinnerIntervalDTO> findProducersWithMaxProductionInterval() {
+    public List<AwardWinnerIntervalDTO> findProducersWithMaxWinningInterval() {
         var maxProductionInterval = producerRepository.findMaxAwardWinningProductionInterval();
         return producerRepository.findProducersWithMaxAwardWinningInterval(maxProductionInterval);
     }
 
     @Transactional
-    public List<AwardWinnerIntervalDTO> findProducersWithMinProductionInterval() {
+    public List<AwardWinnerIntervalDTO> findProducersWithMinWinningInterval() {
         var minProductionInterval = producerRepository.findMinAwardWinningProductionInterval();
         return producerRepository.findProducersWithMinAwardWinningInterval(minProductionInterval);
     }

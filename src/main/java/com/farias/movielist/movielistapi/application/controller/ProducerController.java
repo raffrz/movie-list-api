@@ -21,8 +21,8 @@ public class ProducerController {
 
     @GetMapping(value = "/awardWinningInterval", produces = "application/json")
     public AwardWinnerIntervalResponse getAwardInterval() {
-        var minAwardWinnerIntervals = producerService.findProducersWithMinProductionInterval();
-        var maxAwardWinnerIntervals = producerService.findProducersWithMaxProductionInterval();
+        var minAwardWinnerIntervals = producerService.findProducersWithMinWinningInterval();
+        var maxAwardWinnerIntervals = producerService.findProducersWithMaxWinningInterval();
 
         return new AwardWinnerIntervalResponse(minAwardWinnerIntervals, maxAwardWinnerIntervals);
     }

@@ -6,5 +6,5 @@ import com.farias.movielist.movielistapi.domain.dto.MovieImportDTO;
 
 public interface CsvParser {
 
-    public MovieImportDTO parseCsvToMoviesInput(InputStream inputStream) throws CsvParserException;
+    public MovieImportDTO parseCsvToMovieImportDTO(InputStream inputStream) throws CsvParserException;
 }

@@ -39,11 +39,11 @@ public class MovieService {
     public void importMovies() {
         try {
             InputStream inputStream = new FileInputStream(moviesImportFile);
-            MovieImportDTO moviesInput = csvParser.parseCsvToMoviesInput(inputStream);
-            if (moviesInput.isEmpty()) {
+            MovieImportDTO moviesToImport = csvParser.parseCsvToMovieImportDTO(inputStream);
+            if (moviesToImport.isEmpty()) {
                 return;
             }
-            moviesInput.getItems().forEach(item -> {
+            moviesToImport.getItems().forEach(item -> {
                 var movie = new Movie(Integer.valueOf(item.getYear()), item.getTitle(), item.getStudios(),
                         item.getWinnerAsBoolean());
                 movieRepository.save(movie);
