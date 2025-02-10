@@ -3,12 +3,15 @@ package com.farias.movielist.movielistapi.domain.service;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.farias.movielist.movielistapi.domain.dto.MovieImportDTO;
+import com.farias.movielist.movielistapi.domain.dto.MovieImportItemDTO;
 import com.farias.movielist.movielistapi.domain.entity.Movie;
 import com.farias.movielist.movielistapi.domain.exception.ServiceException;
 import com.farias.movielist.movielistapi.domain.parser.CsvParser;
@@ -48,13 +51,20 @@ public class MovieService {
                         item.getWinnerAsBoolean());
                 movieRepository.save(movie);
 
-                item.getProducersAsStream()
+                this.extractProducerNamesFromMovieImportItem(item)
                         .map(producerService::getProducerByNameOrCreateNew)
                         .forEach(movie::addProducer);
             });
         } catch (FileNotFoundException e) {
             throw new ServiceException("o arquivo de importação dos filmes não foi encontrado", e);
         }
+    }
+
+    private Stream<String> extractProducerNamesFromMovieImportItem(MovieImportItemDTO item) {
+        var normalizedProducers = item.getProducers().replaceAll(", and ", ",").replaceAll(" and ", ",");
+        return Arrays.stream(normalizedProducers.split(","))
+                .map(String::trim)
+                .distinct();
     }
 
 }

@@ -1,8 +1,5 @@
 package com.farias.movielist.movielistapi.domain.dto;
 
-import java.util.Arrays;
-import java.util.stream.Stream;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.opencsv.bean.CsvBindByName;
 
@@ -25,14 +22,6 @@ public class MovieImportItemDTO {
 
     @CsvBindByName(column = "winner")
     private String winner;
-
-    @JsonIgnore
-    public Stream<String> getProducersAsStream() {
-        var normalizedProducers = producers.replaceAll("and,", ",").replaceAll("and", ",");
-        return Arrays.stream(normalizedProducers.split(","))
-                .map(String::trim)
-                .distinct();
-    }
 
     @JsonIgnore
     public boolean getWinnerAsBoolean() {
